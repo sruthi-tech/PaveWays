@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency SOS</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #ccf2e7; /* Light bluish green */
+      background-image: url('bg.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .title {
+      color: #2e7d32; /* Warm green tone */
+    }
+    .safety-tip {
+      color: #003366; /* Dark blue */
+    }
+  </style>
+  <script>
+    let emergencyContacts = ["tel:100", "tel:108"];
+
+    function sendSOS() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          const { latitude, longitude } = position.coords;
+          const message = `I'm in trouble. Here's my location: https://www.google.com/maps?q=${latitude},${longitude}`;
+
+          alert("SOS Sent!\n" + message);
+        });
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function shareLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          const { latitude, longitude } = position.coords;
+          const locationLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+          navigator.clipboard.writeText(locationLink);
+          alert("Location copied to clipboard. Share via WhatsApp, SMS or Email.");
+        });
+      }
+    }
+  </script>
+</head>
+<body class="text-gray-900">
+  <div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6 text-center title">🚨 Emergency SOS</h1>
+
+    <!-- Panic Button -->
+    <div class="flex justify-center mb-8">
+      <button onclick="sendSOS()" class="bg-red-600 hover:bg-red-700 text-white text-xl font-bold py-4 px-8 rounded-full shadow-lg">
+        EMERGENCY SOS
+      </button>
+    </div>
+
+    <!-- Quick Access Numbers -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4 title">📞 Emergency Contacts</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <a href="tel:100" class="bg-blue-100 p-4 rounded shadow text-center">🚔 Police - 100</a>
+        <a href="tel:108" class="bg-green-100 p-4 rounded shadow text-center">🚑 Ambulance - 108</a>
+        <a href="tel:101" class="bg-yellow-100 p-4 rounded shadow text-center">🚒 Fire - 101</a>
+        <a href="#" class="bg-purple-100 p-4 rounded shadow text-center">🏥 Nearby Hospitals</a>
+        <a href="#" class="bg-pink-100 p-4 rounded shadow text-center">🆘 Tourist/Student Helpline</a>
+      </div>
+    </div>
+
+    <!-- Share Location -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4 title">📍 Live Location Sharing</h2>
+      <button onclick="shareLocation()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded shadow">
+        Share Location
+      </button>
+    </div>
+
+    <!-- Nearby Safe Zones (Placeholder) -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4 title">🛡️ Nearby Safe Zones</h2>
+      <div class="bg-white p-4 rounded shadow">
+        <p>Map showing nearest police stations, hospitals, pharmacies...</p>
+        <p class="text-sm text-gray-500">(Integrate with Google Maps API)</p>
+      </div>
+    </div>
+
+    <!-- Offline Mode -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4 title">📄 Offline Info</h2>
+      <a href="emergency-info.pdf" class="text-blue-600 underline">Download Emergency Info PDF</a>
+    </div>
+
+    <!-- Safety Tips -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4 title">🔐 Safety Tips</h2>
+      <ul class="list-disc pl-6">
+        <li class="safety-tip">If lost, stay calm and share your location.</li>
+        <li class="safety-tip">Avoid dark/isolated areas at night.</li>
+        <li class="safety-tip">Don’t share personal details with strangers.</li>
+        <li class="safety-tip">Learn 3-4 emergency phrases in the local language.</li>
+      </ul>
+    </div>
+
+    <!-- Emergency Contacts Setup -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4 title">👨‍👩‍👧 Emergency Contact Setup</h2>
+      <input type="text" placeholder="Enter contact email or number" class="border p-2 rounded w-full max-w-md">
+      <button class="mt-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Save Contact</button>
+    </div>
+
+    <!-- Accessibility Options -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4 title">🔆 Accessibility Options</h2>
+      <button onclick="document.body.classList.toggle('bg-black');document.body.classList.toggle('text-white');" class="bg-gray-800 text-white px-4 py-2 rounded">
+        Toggle Light/Dark Mode
+      </button>
+    </div>
+  </div>
+</body>
+</html>
