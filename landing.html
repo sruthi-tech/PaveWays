@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paveways</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('bg.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #04364A;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(8px);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 22px;
+      color: #04364A;
+    }
+    .logo img {
+      height: 30px;
+      margin-right: 10px;
+    }
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #04364A;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 20px;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    main {
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 0 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .description {
+      font-size: 18px;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="images/logo.jpeg" alt="Paveways Logo" />
+      paveways
+    </div>
+    <nav>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Create Account</a>
+    </nav>
+  </header>
+  <main>
+    <div class="description">
+      Paveways is your smart travel companion. From buses and trains to autos and cabs, get real-time routes, fare info, and connected journey options — all in one place. Safety, convenience, and rewards built for students, tourists, and everyday travelers.
+    </div>
+  </main>
+</body>
+</html>
