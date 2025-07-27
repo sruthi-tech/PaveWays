@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom right, #c8f1ef, #b7e3f8);
+  color: #1d3557;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 10%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1d3557;
+}
+
+.logo img {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+}
+
+nav .btn {
+  text-decoration: none;
+  color: #1d3557;
+  margin-left: 20px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+nav .primary {
+  background-color: #1d3557;
+  color: white;
+}
+
+nav .btn:hover {
+  background-color: rgba(29, 53, 87, 0.1);
+}
+
+main {
+  max-width: 600px;
+  margin: 80px auto;
+  text-align: center;
+}
+
+main h1 {
+  font-size: 36px;
+  line-height: 1.4;
+  margin-bottom: 30px;
+}
+
+main .highlight {
+  color: #0077b6;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 20px;
+}
+
+form input, form select {
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+form button {
+  padding: 14px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  background-color: #ff6b6b;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #e63946;
+}
