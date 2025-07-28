@@ -112,10 +112,24 @@
   </div>
 
   <script>
-    function handleClick(option) {
-      alert('Redirecting to ' + option + ' feature...');
-      // Add actual navigation logic here if needed
+  function handleClick(option) {
+    switch(option) {
+      case 'routes':
+        window.location.href = 'routes.html';
+        break;
+      case 'restaurant':
+        window.location.href = 'restaurant.html';
+        break;
+      case 'rental':
+        window.location.href = 'rental.html';
+        break;
+      case 'sos':
+        window.location.href = 'sos.html';
+        break;
+      default:
+        alert('Feature not available yet!');
     }
-  </script>
+  }
+</script>
 </body>
 </html>
