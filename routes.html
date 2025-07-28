@@ -1,0 +1,172 @@
+<!-- HTML CODE: Route Finder with Sample Data, Filters, Google Maps, Dropdowns -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confused with Routes?</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-teal-100 p-6 font-sans">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow">
+    <h1 class="text-2xl font-bold mb-4 text-center">Confused with Routes?</h1>
+
+    <!-- Dropdown Filters -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block font-semibold">Start Location</label>
+        <select id="startSelect" class="w-full border rounded p-2">
+          <option>Palayam</option>
+          <option>Vazhuthacaud</option>
+          <option>Pettah</option>
+          <option>Medical College</option>
+          <option>Peroorkada</option>
+        </select>
+      </div>
+      <div>
+        <label class="block font-semibold">End Location</label>
+        <select id="endSelect" class="w-full border rounded p-2">
+          <option>Thampanoor Bus Station</option>
+          <option>Karamana</option>
+          <option>East Fort</option>
+          <option>Kazhakkoottam</option>
+          <option>Vellayambalam</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Additional Dropdowns -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label class="block font-semibold">Mode of Transport</label>
+        <select id="transportMode" class="w-full border rounded p-2">
+          <option value="Bus">Bus</option>
+          <option value="Train">Train</option>
+          <option value="Auto">Auto</option>
+          <option value="Cab">Cab</option>
+        </select>
+      </div>
+      <div>
+        <label class="block font-semibold">Budget</label>
+        <select id="budgetOption" class="w-full border rounded p-2">
+          <option value="0-100">Below ₹100</option>
+          <option value="100-250">₹100 - ₹250</option>
+          <option value="250-500">₹250 - ₹500</option>
+          <option value="500-1000">₹500 - ₹1000</option>
+          <option value="1000+">₹1000 and above</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div>
+        <label class="block font-semibold">Sort by</label>
+        <select id="sortBy" class="w-full border rounded p-2">
+          <option value="default">Default</option>
+          <option value="cheapest">Cheapest Fare</option>
+          <option value="fastest">Fastest Route</option>
+        </select>
+      </div>
+      <div class="flex items-end">
+        <button onclick="searchRoutes()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full">Find Route</button>
+      </div>
+    </div>
+
+    <!-- Route Results -->
+    <div id="busFeatures" class="bg-white p-6 rounded-lg shadow mb-6 hidden">
+      <h2 class="text-xl font-semibold mb-4">Route Details</h2>
+      <div id="busRoutesContainer"></div>
+
+      <div class="mb-4">
+        <h3 class="font-bold">Live Tracking</h3>
+        <p id="liveTracking">Tracking data available.</p>
+      </div>
+
+      <div class="mb-4">
+        <h3 class="font-bold">Interactive Map</h3>
+        <div id="map" class="h-64 w-full rounded border"></div>
+      </div>
+
+      <div class="flex space-x-4">
+        <button class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Track</button>
+        <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Get Directions</button>
+        <button class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" onclick="refreshRoutes()">Refresh</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+function searchRoutes() {
+  const start = document.getElementById('startSelect').value;
+  const end = document.getElementById('endSelect').value;
+  const mode = document.getElementById('transportMode').value;
+
+  const busRoutesContainer = document.getElementById('busRoutesContainer');
+  const busFeatures = document.getElementById('busFeatures');
+
+  busRoutesContainer.innerHTML = '';
+  busFeatures.classList.remove('hidden');
+
+  let result = '';
+
+  if (mode === 'Bus') {
+    if (start === 'Palayam' && end === 'Thampanoor Bus Station') {
+      result = `<p><strong>Nearby Bus Stands:</strong> Palayam Bakery Junction, Thampanoor</p>
+                <p><strong>Direct Route:</strong> Walk to Palayam Bakery Junction (16 mins) → Board SFP RPC123 → Bakery Junction → Thiruvananthapuram Central (5 mins)</p>
+                <p><strong>Fare:</strong> ₹31</p>
+                <p><strong>Alternate Route:</strong> Random alternate data</p>
+                <p><strong>Cheapest Fare:</strong> ₹31</p>`;
+    } else if (start === 'Vazhuthacaud' && end === 'Karamana') {
+      result = `<p><strong>Nearby Bus Stands:</strong> Model School, Karamana Stop</p>
+                <p><strong>Direct Route:</strong> Walk to Model School (7 mins) → Board SFP RPC003 → Thiruvananthapuram Central (5 mins)</p>
+                <p><strong>Fare:</strong> ₹33</p>
+                <p><strong>Alternate Route:</strong> Random alternate data</p>
+                <p><strong>Cheapest Fare:</strong> ₹30</p>`;
+    } else if (start === 'Pettah' && end === 'East Fort') {
+      result = `<p><strong>Nearby Bus Stands:</strong> Pettah Junction, East Fort Bus Stand</p>
+                <p><strong>Direct Route:</strong> Board Bus 34B from Pettah Junction → Direct to East Fort (10 mins)</p>
+                <p><strong>Fare:</strong> ₹25</p>
+                <p><strong>Alternate Route:</strong> Walk to Vanchiyoor Stop → Bus 22B to Statue Junction → Change to Bus 11A → East Fort (18 mins)</p>
+                <p><strong>Alternate Fare:</strong> ₹28</p>
+                <p><strong>Cheapest Fare:</strong> ₹25 (Direct)</p>`;
+    } else if (start === 'Medical College' && end === 'Kazhakkoottam') {
+      result = `<p><strong>Nearby Bus Stands:</strong> Medical College Stop, Technopark Stop</p>
+                <p><strong>Direct Route:</strong> Board AC Volvo from Medical College Stop → Direct to Technopark Stop (20 mins)</p>
+                <p><strong>Fare:</strong> ₹45</p>
+                <p><strong>Alternate Route:</strong> Board 25D to Sreekariyam → Bus 12E to Technopark (25 mins)</p>
+                <p><strong>Alternate Fare:</strong> ₹30</p>
+                <p><strong>Cheapest Fare:</strong> ₹30 (Alternate)</p>`;
+    } else if (start === 'Peroorkada' && end === 'Vellayambalam') {
+      result = `<p><strong>Nearby Bus Stands:</strong> Peroorkada Stop, Vellayambalam Junction</p>
+                <p><strong>Direct Route:</strong> Walk to Peroorkada Stop (5 mins) → Board Bus 15A → Vellayambalam (10 mins)</p>
+                <p><strong>Fare:</strong> ₹20</p>
+                <p><strong>Alternate Route:</strong> Auto to Sasthamangalam → Bus 23B to Vellayambalam (15 mins)</p>
+                <p><strong>Alternate Fare:</strong> ₹40</p>
+                <p><strong>Cheapest Fare:</strong> ₹20 (Direct)</p>`;
+    } else {
+      result = `<p>No Bus route data for selected input.</p>`;
+    }
+  } else if (mode === 'Train') {
+    result = `<p><strong>Nearest Railway Stations:</strong> Thiruvananthapuram Central, Pettah</p>
+              <p><strong>Recommended Route:</strong> Board MEMU from Thiruvananthapuram Central to Kazhakkoottam (Travel time: 22 mins)</p>
+              <p><strong>Fare:</strong> ₹15</p>
+              <p><strong>Frequency:</strong> Every 1 hour</p>`;
+  } else if (mode === 'Auto') {
+    result = `<p><strong>Direct Auto Route:</strong> From ${start} to ${end} via major roads</p>
+              <p><strong>Estimated Fare:</strong> ₹80 - ₹150 depending on distance</p>
+              <p><strong>Tip:</strong> Use prepaid auto counters at busy junctions</p>`;
+  } else if (mode === 'Cab') {
+    result = `<p><strong>Cab Options:</strong> Uber, Ola, Rapido</p>
+              <p><strong>Estimated Fare:</strong> ₹100 - ₹250 (AC Sedan), ₹60 - ₹120 (Bike Taxi)</p>
+              <p><strong>Travel Time:</strong> 10 - 30 mins depending on traffic</p>`;
+  } else {
+    result = `<p>No ${mode} route data for selected input.</p>`;
+  }
+
+  busRoutesContainer.innerHTML = result;
+}
+</script>
+</body>
+</html>
