@@ -2,42 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rental Services</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
-
-  <!-- Main Section -->
   <div class="text-center">
     <h1 class="text-4xl font-bold text-gray-800 mb-10">Rental Services Near You</h1>
     
-    <!-- Icon Row -->
     <div class="flex justify-center gap-20">
       
-      <!-- Bikes -->
-      <div class="flex flex-col items-center cursor-pointer hover:text-blue-600">
+      <!-- Bike -->
+      <a href="bike.html" class="flex flex-col items-center cursor-pointer hover:text-blue-600">
         <i data-lucide="bike" class="w-16 h-16"></i>
-        <span class="text-lg mt-2 font-medium">Bikes</span>
-      </div>
+        <span class="text-lg mt-2 font-medium">Bike</span>
+      </a>
 
-      <!-- Cars -->
-      <div class="flex flex-col items-center cursor-pointer hover:text-blue-600">
+      <!-- Car -->
+      <a href="car.html" class="flex flex-col items-center cursor-pointer hover:text-blue-600">
         <i data-lucide="car" class="w-16 h-16"></i>
-        <span class="text-lg mt-2 font-medium">Cars</span>
-      </div>
+        <span class="text-lg mt-2 font-medium">Car</span>
+      </a>
 
-      <!-- Rooms -->
-      <div class="flex flex-col items-center cursor-pointer hover:text-blue-600">
-        <i data-lucide="bed" class="w-16 h-16"></i>
-        <span class="text-lg mt-2 font-medium">Rooms</span>
-      </div>
     </div>
   </div>
 
-  <!-- Lucide Icons Init -->
   <script>
     lucide.createIcons();
   </script>
